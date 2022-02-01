@@ -1,0 +1,17 @@
+ Stop the SLP service on the ESXi host with this command:
+/etc/init.d/slpd stop
+
+The SLP service can only be stopped when the service is not in use. Use the following command to view the operational state of Service Location Protocol Daemon:
+esxcli system slp stats get
+
+Run the following command to disable the SLP service:
+esxcli network firewall ruleset set -r CIMSLP -e 0
+
+To make this change persist across reboots:
+
+chkconfig slpd off
+
+To check if the change is applied across reboots:
+
+chkconfig --list | grep slpd
+output: slpd off
